@@ -1,9 +1,10 @@
 import { parse } from 'node-html-parser';
 import fetch from 'node-fetch';
 
-export default class OlxParser {
+export default class HTMLParser {
   constructor(url) {
     this.URL = url || '';
+    this.elmArr = [];
   }
 
   async getHTML(url = this.URL) {
@@ -24,7 +25,8 @@ export default class OlxParser {
       pre: false,
       comment: false,
     });
-    console.log(HTMLElement.querySelectorAll(param));
+    // console.log(HTMLElement.querySelectorAll(param));
+    // this.elmArr = HTMLElement.querySelectorAll(param);
     return HTMLElement.querySelectorAll(param);
   }
 }
