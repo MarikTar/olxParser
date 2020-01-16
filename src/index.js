@@ -6,4 +6,4 @@ import OlxParser from './parser/OlxParser';
 // htmlParser.parseHTML('a.block.br3.brc8.large.tdnone.lheight24 span');
 
 const olxParser = new OlxParser('https://www.olx.ua/otdam-darom/pol/');
-olxParser.getPagesCount('a.block.br3.brc8.large.tdnone.lheight24 span');
+olxParser.extractData('a.block.br3.brc8.large.tdnone.lheight24 span');
