@@ -8,4 +8,4 @@ const PARAM = 'a.marginright5.link.linkWithHash.detailsLink strong';
 // htmlParser.parseHTML('a.block.br3.brc8.large.tdnone.lheight24 span');
 
 const olxParser = new OlxParser(URL);
-olxParser.sortLargerToSmaller(PARAM);
+olxParser.sortSmallerToLarger(PARAM);

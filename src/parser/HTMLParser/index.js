@@ -11,10 +11,6 @@ export default class HTMLParser {
     this.URL = url;
   }
 
-  show() {
-    console.log(this.URL);
-  }
-
   async getHTML(url = this.URL) {
     if (!url) {
       return '';
@@ -33,8 +29,6 @@ export default class HTMLParser {
       pre: false,
       comment: false,
     });
-    // console.log(HTMLElement.querySelectorAll(param));
-    // this.elmArr = HTMLElement.querySelectorAll(param);
     return HTMLElement.querySelectorAll(param);
   }
 }

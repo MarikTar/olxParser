@@ -1,59 +1,64 @@
 import HTMLParser from '../HTMLParser';
 
 export default class OlxParser extends HTMLParser {
+  async step(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   async getPagesCount() {
     const arr = await this.parseHTML('a.block.br3.brc8.large.tdnone.lheight24 span');
-    // console.log(+arr[arr.length - 1].childNodes[0].rawText);
     return +arr[arr.length - 1].childNodes[0].rawText;
   }
 
-  async parseMainPages(param) {
-    const lng = await this.getPagesCount();
-    const itemPromises = [];
-    for (let i = 1; i <= 1; i += 1) {
-      const data = this.parseHTML(param, `${this.URL}?page=${i}`);
-      itemPromises.push(data);
-    }
-    // await Promise.all(itemPromises);
-    const res = await Promise.all(itemPromises);
-    return res.flat();
-  }
-
-  async extractData(param) {
-    const parsedPages = await this.parseMainPages(param);
-    parsedPages.forEach((elm) => {
-      this.elmArr.push({
+  async compresDataPage(i, param) {
+    const data = await this.parseHTML(param, `${this.URL}?page=${i}`);
+    const tempArr = [];
+    data.forEach((elm) => {
+      tempArr.push({
         name: elm.childNodes[0].rawText,
         href: elm.parentNode.rawAttrs.match(/(?<=href=")(.*)(?=")/g)[0],
         view: 0,
       });
     });
-  }
 
-  async parseView(param) {
-    await this.extractData(param);
     const viewPromises = [];
-    this.elmArr.forEach((elm) => {
-      const data = this.parseHTML('.pdingtop10 strong', elm.href);
-      viewPromises.push(data);
+    tempArr.forEach((elm) => {
+      viewPromises.push(this.parseHTML('.pdingtop10 strong', elm.href));
     });
     const res = await Promise.all(viewPromises);
     const views = res.flat();
 
-    this.elmArr.forEach((elma, i) => {
-      this.elmArr[i].view = +views[i].childNodes[0].rawText;
+    tempArr.forEach((elm, j) => {
+      tempArr[j].view = +views[j].childNodes[0].rawText;
     });
+    this.elmArr.push(...tempArr);
+  }
+
+  async parseMainPages(num = 1, lng = 0, param) {
+    let i = num;
+    await this.compresDataPage(i, param);
+    await this.step(4000);
+    i += 1;
+    if (i <= lng) {
+      return this.parseMainPages(i, lng, param);
+    }
+    return new Promise((resolve) => resolve());
+  }
+
+  async extractData(param) {
+    const lng = await this.getPagesCount();
+    await this.parseMainPages(1, lng, param);
   }
 
   async sortLargerToSmaller(param) {
-    await this.parseView(param);
+    await this.extractData(param);
     this.elmArr.sort((a, b) => b.view - a.view);
-    console.log(this.elmArr);
   }
 
   async sortSmallerToLarger(param) {
-    await this.parseView(param);
+    await this.extractData(param);
     this.elmArr.sort((a, b) => a.view - b.view);
-    console.log(this.elmArr);
   }
 }
