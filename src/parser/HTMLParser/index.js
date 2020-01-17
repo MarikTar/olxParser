@@ -7,6 +7,14 @@ export default class HTMLParser {
     this.elmArr = [];
   }
 
+  newURL(url) {
+    this.URL = url;
+  }
+
+  show() {
+    console.log(this.URL);
+  }
+
   async getHTML(url = this.URL) {
     if (!url) {
       return '';
@@ -16,8 +24,8 @@ export default class HTMLParser {
     return result;
   }
 
-  async parseHTML(param = 'body') {
-    const HTMLText = await this.getHTML(this.URL);
+  async parseHTML(param = 'body', url = this.URL) {
+    const HTMLText = await this.getHTML(url);
     const HTMLElement = parse(HTMLText, {
       lowerCaseTagName: false,
       script: false,
