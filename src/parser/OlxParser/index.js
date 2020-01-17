@@ -10,7 +10,7 @@ export default class OlxParser extends HTMLParser {
   async extractData(param) {
     const lng = await this.getPagesCount();
     const items = [];
-    for (let i = 1; i <= lng; i += 1) {
+    for (let i = 1; i <= 10; i += 1) {
       const data = this.parseHTML(param, `${this.URL}?page=${i}`);
       items.push(data);
     }
