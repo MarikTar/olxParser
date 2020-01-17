@@ -7,23 +7,34 @@ export default class OlxParser extends HTMLParser {
     return +arr[arr.length - 1].childNodes[0].rawText;
   }
 
-  async extractData(param) {
+  async parseMainPages(param) {
     const lng = await this.getPagesCount();
     const items = [];
     for (let i = 1; i <= lng; i += 1) {
       const data = this.parseHTML(param, `${this.URL}?page=${i}`);
       items.push(data);
     }
-    let fetchedItems = await Promise.all(items);
-    fetchedItems = fetchedItems.flat();
-    const itemsAttrs = [];
-    fetchedItems.forEach((elem) => {
-      itemsAttrs.push({
-        name: elem.childNodes[0].rawText,
-        href: elem.parentNode.rawAttrs.match(/(?<=href=")(.*)(?=")/g)[0],
+    // await Promise.all(items);
+    const fetchedItems = await Promise.all(items);
+    return fetchedItems.flat();
+  }
+
+  async extractData(param) {
+    const parsedPages = await this.parseMainPages(param);
+    parsedPages.forEach((elm) => {
+      this.elmArr.push({
+        name: elm.childNodes[0].rawText,
+        href: elm.parentNode.rawAttrs.match(/(?<=href=")(.*)(?=")/g)[0],
         view: 0,
       });
     });
-    console.log(itemsAttrs);
+  }
+
+  async as(param) {
+    await this.extractData(param);
+    this.elmArr.forEach((elm) => {
+      const data = this.parseHTML('#offerbottombar.pdingtop10 strong', elm.href);
+      console.log(data);
+    });
   }
 }
