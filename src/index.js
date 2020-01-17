@@ -1,5 +1,6 @@
 // import HTMLParser from './parser/HTMLParser';
 import OlxParser from './parser/OlxParser';
+// import OlxParser from '../dist/OlxParser';
 
 const URL = 'https://www.olx.ua/otdam-darom/pol/';
 const PARAM = 'a.marginright5.link.linkWithHash.detailsLink strong';
