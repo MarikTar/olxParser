@@ -16,8 +16,8 @@ export default class HTMLParser {
     return result;
   }
 
-  async parseHTML(param = 'body') {
-    const HTMLText = await this.getHTML(this.URL);
+  async parseHTML(param = 'body', url = this.URL) {
+    const HTMLText = await this.getHTML(url);
     const HTMLElement = parse(HTMLText, {
       lowerCaseTagName: false,
       script: false,

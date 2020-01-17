@@ -7,14 +7,23 @@ export default class OlxParser extends HTMLParser {
     return +arr[arr.length - 1].childNodes[0].rawText;
   }
 
-  async extractData() {
-    // const lng = await this.getPagesCount();
-    const itemsArr = [];
-    for (let i = 1; i <= 2; i += 1) {
-      const data = this.parseHTML(`${this.URL}?page=${i}`);
-      itemsArr.push(data);
+  async extractData(param) {
+    const lng = await this.getPagesCount();
+    const items = [];
+    for (let i = 1; i <= lng; i += 1) {
+      const data = this.parseHTML(param, `${this.URL}?page=${i}`);
+      items.push(data);
     }
-    this.itemsArr = await Promise.all(itemsArr);
-    console.log(this.itemsArr);
+    let fetchedItems = await Promise.all(items);
+    fetchedItems = fetchedItems.flat();
+    const itemsAttrs = [];
+    fetchedItems.forEach((elem) => {
+      itemsAttrs.push({
+        name: elem.childNodes[0].rawText,
+        href: elem.parentNode.rawAttrs.match(/(?<=href=")(.*)(?=")/g)[0],
+        view: 0,
+      });
+    });
+    console.log(itemsAttrs);
   }
 }
