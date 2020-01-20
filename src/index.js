@@ -6,8 +6,9 @@ import OlxParser from './parser/OlxParser';
 // import OlxParser from '../dist/OlxParser';
 
 // const URL = 'https://www.olx.ua/uk/rabota/meditsina-farmatsiya/pol/';
-const olxParser = new OlxParser();
 const PARAM = 'a.marginright5.link.linkWithHash.detailsLink strong';
+const olxParser = new OlxParser();
+// olxParser.sortSmallerToLarger(PARAM);
 // const htmlParser = new HTMLParser('https://www.olx.ua/transport/legkovye-avtomobili/pol/');
 // htmlParser.parseHTML('a.marginright5.link.linkWithHash.detailsLink strong');
 // htmlParser.parseHTML('a.block.br3.brc8.large.tdnone.lheight24 span');
