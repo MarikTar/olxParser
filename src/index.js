@@ -5,7 +5,7 @@ import cors from 'cors';
 import OlxParser from './parser/OlxParser';
 // import OlxParser from '../dist/OlxParser';
 
-// const URL = 'https://www.olx.ua/otdam-darom/pol/';
+// const URL = 'https://www.olx.ua/uk/rabota/meditsina-farmatsiya/pol/';
 const olxParser = new OlxParser();
 const PARAM = 'a.marginright5.link.linkWithHash.detailsLink strong';
 // const htmlParser = new HTMLParser('https://www.olx.ua/transport/legkovye-avtomobili/pol/');
