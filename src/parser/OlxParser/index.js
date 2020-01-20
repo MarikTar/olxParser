@@ -40,6 +40,7 @@ export default class OlxParser extends HTMLParser {
     let i = num;
     await this.compresDataPage(i, param);
     await this.step(4000);
+    console.log(i);
     i += 1;
     if (i <= lng) {
       return this.parseMainPages(i, lng, param);
