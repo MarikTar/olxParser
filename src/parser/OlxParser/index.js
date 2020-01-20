@@ -56,10 +56,12 @@ export default class OlxParser extends HTMLParser {
   async sortLargerToSmaller(param) {
     await this.extractData(param);
     this.elmArr.sort((a, b) => b.view - a.view);
+    return this.elmArr;
   }
 
   async sortSmallerToLarger(param) {
     await this.extractData(param);
     this.elmArr.sort((a, b) => a.view - b.view);
+    return this.elmArr;
   }
 }
