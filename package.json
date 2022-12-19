@@ -2,15 +2,19 @@
   "name": "olxparser",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/index.js"
+    "start": "electron .",
+    "start2": "babel-node ./src/index.js",
+    "build": "rm -rf dist && mkdir dist && babel src -s -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "electron": "^7.1.9",
+    "express": "^4.17.1",
     "node": "^13.6.0",
     "node-fetch": "^2.6.0",
     "node-html-parser": "^1.1.18"
@@ -21,6 +25,7 @@
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "babel-eslint": "^10.0.3",
+    "electron-middle-sass": "^1.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-babel": "^5.3.0",

@@ -1,9 +1,14 @@
 import { parse } from 'node-html-parser';
 import fetch from 'node-fetch';
 
-export default class OlxParser {
+export default class HTMLParser {
   constructor(url) {
     this.URL = url || '';
+    this.elmArr = [];
+  }
+
+  newURL(url) {
+    this.URL = url;
   }
 
   async getHTML(url = this.URL) {
@@ -15,8 +20,8 @@ export default class OlxParser {
     return result;
   }
 
-  async parseHTML(param = 'body') {
-    const HTMLText = await this.getHTML(this.URL);
+  async parseHTML(param = 'body', url = this.URL) {
+    const HTMLText = await this.getHTML(url);
     const HTMLElement = parse(HTMLText, {
       lowerCaseTagName: false,
       script: false,
@@ -24,7 +29,6 @@ export default class OlxParser {
       pre: false,
       comment: false,
     });
-    console.log(HTMLElement.querySelectorAll(param));
     return HTMLElement.querySelectorAll(param);
   }
 }
