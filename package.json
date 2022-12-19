@@ -14,7 +14,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "electron": "^7.1.9",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "node": "^13.6.0",
     "node-fetch": "^2.6.0",
     "node-html-parser": "^1.1.18"
