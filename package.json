@@ -25,7 +25,7 @@
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "babel-eslint": "^10.0.3",
-    "electron-middle-sass": "^1.0.2",
+    "electron-middle-sass": "^1.0.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-babel": "^5.3.0",
